@@ -47,11 +47,10 @@ class MyWidget(QMainWindow):
     def update_result(self):
         cur = self.con.cursor()
         result = cur.execute("SELECT * FROM timetable_lessons").fetchall()
-        print(result)
         self.timetable.setRowCount(len(result))
         self.timetable.setColumnCount(len(result[0]))
         self.titles = [description[0] for description in cur.description]
-        #self.timetable.setVerticalHeaderItem(0, self.titles[0])    Вот тут надо написать чтобы заголовки из bd считывались в таблицу
+        self.timetable.setHorizontalHeaderLabels(self.titles)    #Вот тут надо написать чтобы заголовки из bd считывались в таблицу
         for i, elem in enumerate(result):
             for j, val in enumerate(elem):
                 self.timetable.setItem(i, j, QTableWidgetItem(str(val)))
