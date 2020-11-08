@@ -5,15 +5,16 @@ import csv
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QDialog
 
-WEEK = {0: 'Понедельник', 1: 'Вторник', 2: 'Среда', 3: 'Четверг', 4: 'Пятница',
-        5: 'Суббота', 6: 'Воскресенье'}
+WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
+        'Sunday']
 
 
 class Popup(QDialog):  # авторизация всплывающим окном
     def __init__(self, *args, **kwargs):
         super().__init__()
         with open('authorize.csv', encoding="utf8") as csvfile:
-            self.reader = list(csv.DictReader(csvfile, delimiter=';', quotechar='"'))[0]
+            self.reader = \
+            list(csv.DictReader(csvfile, delimiter=';', quotechar='"'))[0]
             self.id = self.reader['club_id']
             self.token = self.reader['token']
         print(self.id, self.token)
@@ -32,7 +33,7 @@ class Popup(QDialog):  # авторизация всплывающим окно�
                 f, fieldnames=['club_id', 'token'],
                 delimiter=';', quoting=csv.QUOTE_NONNUMERIC)
             writer.writeheader()
-            data = {'club_id':self.id, 'token':self.token}
+            data = {'club_id': self.id, 'token': self.token}
             writer.writerow(data)
         self.close()
 
@@ -50,35 +51,38 @@ class MyWidget(QMainWindow):
         self.add_lesson.clicked.connect(self.add_less)
         self.db_update.clicked.connect(self.update_db)
         self.lessons_list.itemClicked.connect(self.cur_lesson)
-        self.lessons_list.itemClicked.connect(self.cur_lesson)
         self.login = Popup(self)
-        self.avtorizacia.clicked.connect(self.avtorization)
-        result = self.cur.execute("""SELECT Урок FROM lessons""").fetchall()
+        self.authorize.clicked.connect(self.authorizing)
+        self.result = self.cur.execute(
+            """SELECT lesson FROM lessons""").fetchall()
         self.update_result()
-        for i in range(len(result)):
-            self.lessons_list.addItem(result[i][0])
+        for i in range(len(self.result)):
+            self.lessons_list.addItem(self.result[i][0])
 
     def add_less(
             self):  # Тут всё работает, из нижней строки добавляет уроки в базу данных
-        lesson = self.lesson_line.text()
+        self.selected_lesson = self.lesson_line.text()
         self.cur.execute(
-            f"""INSERT INTO lessons(Урок) VALUES('{lesson}')""")
+            f"""INSERT INTO lessons(lesson) VALUES('{self.selected_lesson}')""")
         self.con.commit()
-        result = self.cur.execute("""SELECT Урок FROM lessons""").fetchall()
+        result = self.cur.execute("""SELECT lesson FROM lessons""").fetchall()
         self.lessons_list.clear()
         for i in range(len(result)):
             self.lessons_list.addItem(result[i][0])
 
     def update_db(
             self):  # вот это должно добавлять выбранный урок и время в выбранную ячейку в таблице
-        cur_row = self.timetable.currentRow()
-        cur_column = self.timetable.currentColumn()
-        self.timetable.setItem(cur_row, cur_column, self.current_lesson)
+        self.cur_row = self.timetable.currentRow()
+        self.cur_column = self.timetable.currentColumn()
+        print(WEEK[self.cur_row], self.current_lesson, self.cur_column + 1)
+        self.cur.execute(f'''UPDATE timetable_lessons
+SET {WEEK[self.cur_column - 1]} = '{self.current_lesson}'
+WHERE id = {self.cur_row + 1}''')
+        self.con.commit()
+        self.update_result()
 
-    def cur_lesson(self,
-                   item):  # считывает какой урок сейчас выбран в списке уроков
-        self.current_lesson = item
-        print(item.text())
+    def cur_lesson(self, item):  # считывает какой урок сейчас выбран в списке уроков
+        self.current_lesson = item.text()
 
     def update_result(self):
         cur = self.con.cursor()
@@ -91,9 +95,8 @@ class MyWidget(QMainWindow):
         for i, elem in enumerate(result):
             for j, val in enumerate(elem):
                 self.timetable.setItem(i, j, QTableWidgetItem(str(val)))
-        self.modified = {}
 
-    def avtorization(self):  # кнопка авторизации
+    def authorizing(self):  # кнопка авторизации
         self.login.show()
 
 

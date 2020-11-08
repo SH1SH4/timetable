@@ -33,7 +33,11 @@
     <list default="true" id="0f99c1c3-27ae-44fd-bac6-ba31e0f24431" name="Default Changelist" comment="считывает токен из файла и подставляет в строку">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/проект1/authorize.csv" beforeDir="false" afterPath="$PROJECT_DIR$/проект1/authorize.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/проект1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/проект1/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/проект1/qt.ui" beforeDir="false" afterPath="$PROJECT_DIR$/проект1/qt.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/проект1/schoolshit.py" beforeDir="false" afterPath="$PROJECT_DIR$/проект1/schoolshit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/проект1/расписание.db" beforeDir="false" afterPath="$PROJECT_DIR$/проект1/расписание.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/расписание.db" beforeDir="false" afterPath="$PROJECT_DIR$/расписание.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +72,27 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RunManager" selected="Python.schoolshit (1)">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Git" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/проект1" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/проект1/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="schoolshit (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Git" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -113,6 +138,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.schoolshit (1)" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.schoolshit" />
         <item itemvalue="Python.schoolshit" />
         <item itemvalue="Python.schoolshit" />
@@ -158,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604831719389</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Функционал авторизации готов">
+      <created>1604856967064</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1604856967064</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -189,7 +222,8 @@
     <MESSAGE value="Накрутил одну кнопку, привязал считывание с базы данных" />
     <MESSAGE value="Теперь работает считывание заголовков таблицы" />
     <MESSAGE value="считывает токен из файла и подставляет в строку" />
-    <option name="LAST_COMMIT_MESSAGE" value="считывает токен из файла и подставляет в строку" />
+    <MESSAGE value="Функционал авторизации готов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Функционал авторизации готов" />
   </component>
   <component name="WindowStateProjectService">
     <state x="652" y="401" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604400554725">
@@ -212,30 +246,30 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="375" y="476" key="Github.UntrackedFilesDialog/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604173272532" />
-    <state width="1897" height="298" key="GridCell.Tab.0.bottom" timestamp="1604856872137">
+    <state width="936" height="225" key="GridCell.Tab.0.bottom" timestamp="1604861962732">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1897" height="298" key="GridCell.Tab.0.bottom/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604856872137" />
-    <state width="1897" height="298" key="GridCell.Tab.0.center" timestamp="1604856872137">
+    <state width="936" height="225" key="GridCell.Tab.0.bottom/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604861962732" />
+    <state width="936" height="225" key="GridCell.Tab.0.center" timestamp="1604861962732">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1897" height="298" key="GridCell.Tab.0.center/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604856872137" />
-    <state width="1897" height="298" key="GridCell.Tab.0.left" timestamp="1604856872137">
+    <state width="936" height="225" key="GridCell.Tab.0.center/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604861962732" />
+    <state width="936" height="225" key="GridCell.Tab.0.left" timestamp="1604861962732">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1897" height="298" key="GridCell.Tab.0.left/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604856872137" />
-    <state width="1897" height="298" key="GridCell.Tab.0.right" timestamp="1604856872137">
+    <state width="936" height="225" key="GridCell.Tab.0.left/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604861962732" />
+    <state width="936" height="225" key="GridCell.Tab.0.right" timestamp="1604861962732">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1897" height="298" key="GridCell.Tab.0.right/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604856872137" />
+    <state width="936" height="225" key="GridCell.Tab.0.right/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604861962732" />
     <state x="461" y="185" key="SettingsEditor" timestamp="1604415893595">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="185" key="SettingsEditor/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604415893595" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1604831778631">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1604856985838">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604831778631" />
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604856985838" />
     <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1604607454602" />
     <state x="773" y="274" key="VcsDiffUtil.ChangesDialog" timestamp="1604607291999">
       <screen x="0" y="0" width="1920" height="1080" />

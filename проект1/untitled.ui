@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>378</width>
-    <height>279</height>
+    <width>290</width>
+    <height>139</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>10</y>
+     <x>60</x>
+     <y>0</y>
      <width>171</width>
      <height>41</height>
     </rect>
@@ -29,35 +29,35 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>100</y>
-     <width>47</width>
-     <height>13</height>
+     <x>10</x>
+     <y>50</y>
+     <width>35</width>
+     <height>15</height>
     </rect>
    </property>
    <property name="text">
-    <string>ТОКЕН</string>
+    <string>Token</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>140</y>
-     <width>47</width>
-     <height>13</height>
+     <x>60</x>
+     <y>80</y>
+     <width>35</width>
+     <height>15</height>
     </rect>
    </property>
    <property name="text">
-    <string>id группы</string>
+    <string>Club_id</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="EditToken">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>100</y>
-     <width>113</width>
+     <x>50</x>
+     <y>50</y>
+     <width>230</width>
      <height>20</height>
     </rect>
    </property>
@@ -65,9 +65,9 @@
   <widget class="QLineEdit" name="EditId">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>140</y>
-     <width>113</width>
+     <x>110</x>
+     <y>80</y>
+     <width>120</width>
      <height>20</height>
     </rect>
    </property>
@@ -75,8 +75,8 @@
   <widget class="QPushButton" name="CancelButton">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>240</y>
+     <x>210</x>
+     <y>110</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -88,8 +88,8 @@
   <widget class="QPushButton" name="OkButton">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>240</y>
+     <x>0</x>
+     <y>110</y>
      <width>75</width>
      <height>23</height>
     </rect>
