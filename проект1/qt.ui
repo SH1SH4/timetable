@@ -126,8 +126,8 @@
      <widget class="QPushButton" name="authorize">
       <property name="geometry">
        <rect>
-        <x>480</x>
-        <y>480</y>
+        <x>0</x>
+        <y>0</y>
         <width>91</width>
         <height>23</height>
        </rect>
