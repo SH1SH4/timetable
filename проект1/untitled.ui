@@ -52,7 +52,7 @@
     <string>id группы</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="EditToken">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -62,7 +62,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="EditId">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -72,7 +72,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="CancelButton">
    <property name="geometry">
     <rect>
      <x>290</x>
@@ -85,7 +85,7 @@
     <string>Cancel</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="OkButton">
    <property name="geometry">
     <rect>
      <x>210</x>

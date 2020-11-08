@@ -1,36 +1,42 @@
 import sys
 import sqlite3
+import csv
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QDialog
 
-WEEK = {0: 'Понедельник', 1: 'Вторник', 2: 'Среда', 3: 'Четверг', 4: 'Пятница', 5: 'Суббота', 6: 'Воскресенье'}
+WEEK = {0: 'Понедельник', 1: 'Вторник', 2: 'Среда', 3: 'Четверг', 4: 'Пятница',
+        5: 'Суббота', 6: 'Воскресенье'}
 
 
 class Popup(QDialog):  # авторизация всплывающим окном
     def __init__(self, *args, **kwargs):
         super().__init__()
+        with open('authorize.csv', encoding="utf8") as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
+            for i in reader:
+                self.id_token = i
+            self.id = self.id_token['club_id']
+            self.token = self.id_token['token']
+        print(self.id, self.token)
         uic.loadUi('untitled.ui', self)
         self.setModal(True)
-        self.pushButton_2.clicked.connect(self.button_ok)
-        self.pushButton.clicked.connect(self.button_cancle)
+        self.OkButton.clicked.connect(self.button_ok)
+        self.CancelButton.clicked.connect(self.button_cancel)
+        self.EditToken.setText(self.token)
+        self.EditId.setText(self.id)
 
     def button_ok(self):
-        token = self.lineEdit.text()
-        id_group = self.lineEdit_2.text()
-        print(id_group, token)
-        if len(token) != 0 and len(id_group) != 0:
-            self.cur.execute(f"""INSERT INTO id_token(id,token) VALUES({id_group},{token})""").fetchall()
-            result = self.cur.execute("""SELECT id FROM id_token""").fetchall()
-            self.con.commit()
-            self.close()
+        self.token = self.EditToken.text()
+        self.id = self.EditId.text()
+        print(self.id_group, self.token)
+        self.close()
 
-    def button_cancle(self):
-       self.close()
+    def button_cancel(self):
+        self.close()
 
 
 class MyWidget(QMainWindow):
-
     def __init__(self):
         self.current_lesson = None
         super().__init__()
@@ -48,7 +54,8 @@ class MyWidget(QMainWindow):
         for i in range(len(result)):
             self.lessons_list.addItem(result[i][0])
 
-    def add_less(self):  # Тут всё работает, из нижней строки добавляет уроки в базу данных
+    def add_less(
+            self):  # Тут всё работает, из нижней строки добавляет уроки в базу данных
         lesson = self.lesson_line.text()
         self.cur.execute(
             f"""INSERT INTO lessons(Урок) VALUES('{lesson}')""")
@@ -58,12 +65,14 @@ class MyWidget(QMainWindow):
         for i in range(len(result)):
             self.lessons_list.addItem(result[i][0])
 
-    def update_db(self):  # вот это должно добавлять выбранный урок и время в выбранную ячейку в таблице
+    def update_db(
+            self):  # вот это должно добавлять выбранный урок и время в выбранную ячейку в таблице
         cur_row = self.timetable.currentRow()
         cur_column = self.timetable.currentColumn()
         self.timetable.setItem(cur_row, cur_column, self.current_lesson)
 
-    def cur_lesson(self, item):  # считывает какой урок сейчас выбран в списке уроков
+    def cur_lesson(self,
+                   item):  # считывает какой урок сейчас выбран в списке уроков
         self.current_lesson = item
         print(item.text())
 
