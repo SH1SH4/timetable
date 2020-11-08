@@ -14,7 +14,7 @@ class Popup(QDialog):  # авторизация всплывающим окно�
         super().__init__()
         with open('authorize.csv', encoding="utf8") as csvfile:
             self.reader = \
-            list(csv.DictReader(csvfile, delimiter=';', quotechar='"'))[0]
+                list(csv.DictReader(csvfile, delimiter=';', quotechar='"'))[0]
             self.id = self.reader['club_id']
             self.token = self.reader['token']
         print(self.id, self.token)
@@ -41,7 +41,7 @@ class Popup(QDialog):  # авторизация всплывающим окно�
         self.close()
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow):  # чтобы закоммитить пишу :)
     def __init__(self):
         self.current_lesson = None
         super().__init__()
@@ -51,11 +51,12 @@ class MyWidget(QMainWindow):
         self.add_lesson.clicked.connect(self.add_less)
         self.db_update.clicked.connect(self.update_db)
         self.lessons_list.itemClicked.connect(self.cur_lesson)
+        self.timetable.itemClicked.connect(self.coords)
         self.login = Popup(self)
         self.authorize.clicked.connect(self.authorizing)
         self.result = self.cur.execute(
             """SELECT lesson FROM lessons""").fetchall()
-        self.update_result()
+        self.timetable_ss()
         for i in range(len(self.result)):
             self.lessons_list.addItem(self.result[i][0])
 
@@ -70,31 +71,48 @@ class MyWidget(QMainWindow):
         for i in range(len(result)):
             self.lessons_list.addItem(result[i][0])
 
+    def coords(self):
+        print(self.timetable.currentRow(), self.timetable.currentColumn())
+
     def update_db(
             self):  # вот это должно добавлять выбранный урок и время в выбранную ячейку в таблице
         self.cur_row = self.timetable.currentRow()
         self.cur_column = self.timetable.currentColumn()
-        print(WEEK[self.cur_row], self.current_lesson, self.cur_column + 1)
-        self.cur.execute(f'''UPDATE timetable_lessons
-SET {WEEK[self.cur_column - 1]} = '{self.current_lesson}'
+        self.cur.execute(f'''UPDATE timetable_time
+SET {WEEK[self.cur_column]} = '{self.add_time.text()}'
 WHERE id = {self.cur_row + 1}''')
+        print(self.add_time.text())
+        self.cur.execute(f'''UPDATE timetable_lessons
+        SET {WEEK[self.cur_column]} = '{self.current_lesson}'
+        WHERE id = {self.cur_row + 1}''')
         self.con.commit()
-        self.update_result()
+        self.timetable_ss()
 
-    def cur_lesson(self, item):  # считывает какой урок сейчас выбран в списке уроков
+    def cur_lesson(self,
+                   item):  # считывает какой урок сейчас выбран в списке уроков
         self.current_lesson = item.text()
 
-    def update_result(self):
-        cur = self.con.cursor()
-        result = cur.execute("SELECT * FROM timetable_lessons").fetchall()
+    def timetable_ss(self):
+        result = self.cur.execute("SELECT * FROM timetable_lessons").fetchall()
+        t_result = self.cur.execute("SELECT * FROM timetable_time").fetchall()
         self.timetable.setRowCount(len(result))
-        self.timetable.setColumnCount(len(result[0]))
-        self.titles = [description[0] for description in cur.description]
+        self.timetable.setColumnCount(len(result[0]) - 1)
+        self.titles = [description[0] for description in self.cur.description]
         self.timetable.setHorizontalHeaderLabels(
-            self.titles)  # Вот тут надо написать чтобы заголовки из bd считывались в таблицу
+            self.titles[1:])  # Вот тут надо написать чтобы заголовки из bd считывались в таблицу
         for i, elem in enumerate(result):
             for j, val in enumerate(elem):
-                self.timetable.setItem(i, j, QTableWidgetItem(str(val)))
+                print(j, val)
+                if j == 0:
+                    continue
+                self.time = t_result[i][j]
+                if self.time != None:
+                    self.timetable.setItem(i, j - 1, QTableWidgetItem(
+                        str(val) + '  ' + str(self.time)))
+                else:
+                    self.time = ''
+                    self.timetable.setItem(i, j - 1, QTableWidgetItem(
+                        str(val) + '  ' + str(self.time)))
 
     def authorizing(self):  # кнопка авторизации
         self.login.show()
