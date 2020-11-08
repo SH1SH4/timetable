@@ -13,11 +13,9 @@ class Popup(QDialog):  # авторизация всплывающим окно�
     def __init__(self, *args, **kwargs):
         super().__init__()
         with open('authorize.csv', encoding="utf8") as csvfile:
-            reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
-            for i in reader:
-                self.id_token = i
-            self.id = self.id_token['club_id']
-            self.token = self.id_token['token']
+            self.reader = list(csv.DictReader(csvfile, delimiter=';', quotechar='"'))[0]
+            self.id = self.reader['club_id']
+            self.token = self.reader['token']
         print(self.id, self.token)
         uic.loadUi('untitled.ui', self)
         self.setModal(True)
@@ -29,7 +27,13 @@ class Popup(QDialog):  # авторизация всплывающим окно�
     def button_ok(self):
         self.token = self.EditToken.text()
         self.id = self.EditId.text()
-        print(self.id_group, self.token)
+        with open('authorize.csv', 'w', newline='') as f:
+            writer = csv.DictWriter(
+                f, fieldnames=['club_id', 'token'],
+                delimiter=';', quoting=csv.QUOTE_NONNUMERIC)
+            writer.writeheader()
+            data = {'club_id':self.id, 'token':self.token}
+            writer.writerow(data)
         self.close()
 
     def button_cancel(self):
