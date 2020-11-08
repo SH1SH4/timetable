@@ -41,7 +41,7 @@ class Popup(QDialog):  # авторизация всплывающим окно�
         self.close()
 
 
-class MyWidget(QMainWindow):  # чтобы закоммитить пишу :)
+class MyWidget(QMainWindow):
     def __init__(self):
         self.current_lesson = None
         super().__init__()
@@ -51,7 +51,7 @@ class MyWidget(QMainWindow):  # чтобы закоммитить пишу :)
         self.add_lesson.clicked.connect(self.add_less)
         self.db_update.clicked.connect(self.update_db)
         self.lessons_list.itemClicked.connect(self.cur_lesson)
-        self.timetable.itemClicked.connect(self.coords)
+        self.timetable.itemClicked.connect(self.check_homework)
         self.login = Popup(self)
         self.authorize.clicked.connect(self.authorizing)
         self.result = self.cur.execute(
@@ -71,8 +71,13 @@ class MyWidget(QMainWindow):  # чтобы закоммитить пишу :)
         for i in range(len(result)):
             self.lessons_list.addItem(result[i][0])
 
-    def coords(self):
+    def check_homework(self):
         print(self.timetable.currentRow(), self.timetable.currentColumn())
+        self.cc = self.timetable.currentColumn()
+        self.cr = self.timetable.currentRow()
+        self.cur.execute('''SELECT ?
+FROM homework
+WHERE id = ?''', (WEEK[self.cc], self.cr - 1))
 
     def update_db(
             self):  # вот это должно добавлять выбранный урок и время в выбранную ячейку в таблице
@@ -102,13 +107,14 @@ WHERE id = {self.cur_row + 1}''')
             self.titles[1:])  # Вот тут надо написать чтобы заголовки из bd считывались в таблицу
         for i, elem in enumerate(result):
             for j, val in enumerate(elem):
-                print(j, val)
                 if j == 0:
                     continue
                 self.time = t_result[i][j]
                 if self.time != None:
                     self.timetable.setItem(i, j - 1, QTableWidgetItem(
                         str(val) + '  ' + str(self.time)))
+                elif val == None:
+                    self.timetable.setItem(i, j - 1, QTableWidgetItem(str(val)))
                 else:
                     self.time = ''
                     self.timetable.setItem(i, j - 1, QTableWidgetItem(
