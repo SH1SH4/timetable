@@ -9,14 +9,36 @@ WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
         'Sunday']
 
 
+def write(token, id, peer_id):
+    with open('authorize.csv', 'w', newline='') as f:
+        writer = csv.DictWriter(
+            f, fieldnames=['club_id', 'token', 'peer_id'],
+            delimiter=';', quoting=csv.QUOTE_NONNUMERIC)
+        writer.writeheader()
+        data = {'club_id': id,
+                'token': token,
+                'peer_id': peer_id}
+        writer.writerow(data)
+
+
 class Popup(QDialog):  # авторизация всплывающим окном
     def __init__(self, *args, **kwargs):
         super().__init__()
-        with open('authorize.csv', encoding="utf8") as csvfile:
-            self.reader = \
-                list(csv.DictReader(csvfile, delimiter=';', quotechar='"'))[0]
-            self.id = self.reader['club_id']
-            self.token = self.reader['token']
+        try:
+            with open('authorize.csv', encoding="utf8") as csvfile:
+                self.reader = \
+                    csv.DictReader(csvfile, delimiter=';', quotechar='"')
+                self.reader = list(self.reader)[0]
+                self.id = self.reader['club_id']
+                self.token = self.reader['token']
+                if 'peer_id' in self.reader:
+                    self.peer_id = self.reader['peer_id']
+                else:
+                    self.peer_id = 0
+        except:
+            self.id = ''
+            self.token = ''
+            self.peer_id = 0
         print(self.id, self.token)
         uic.loadUi('untitled.ui', self)
         self.setModal(True)
@@ -28,13 +50,7 @@ class Popup(QDialog):  # авторизация всплывающим окно�
     def button_ok(self):
         self.token = self.EditToken.text()
         self.id = self.EditId.text()
-        with open('authorize.csv', 'w', newline='') as f:
-            writer = csv.DictWriter(
-                f, fieldnames=['club_id', 'token'],
-                delimiter=';', quoting=csv.QUOTE_NONNUMERIC)
-            writer.writeheader()
-            data = {'club_id': self.id, 'token': self.token}
-            writer.writerow(data)
+        write(self.token, self.id, self.peer_id)
         self.close()
 
     def button_cancel(self):
@@ -104,7 +120,8 @@ WHERE id = {self.cur_row + 1}''')
         self.timetable.setColumnCount(len(result[0]) - 1)
         self.titles = [description[0] for description in self.cur.description]
         self.timetable.setHorizontalHeaderLabels(
-            self.titles[1:])  # Вот тут надо написать чтобы заголовки из bd считывались в таблицу
+            self.titles[
+            1:])  # Вот тут надо написать чтобы заголовки из bd считывались в таблицу
         for i, elem in enumerate(result):
             for j, val in enumerate(elem):
                 if j == 0:
