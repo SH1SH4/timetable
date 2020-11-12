@@ -58,6 +58,7 @@ class MyWidget(QMainWindow):
 
     def __init__(self):
         self.current_lesson = None
+        self.current_time = None
         super().__init__()
         uic.loadUi('qt.ui', self)
         self.con = sqlite3.connect("расписание.db")
@@ -66,11 +67,11 @@ class MyWidget(QMainWindow):
         self.db_update.clicked.connect(self.update_db)
         self.add_time_message.clicked.connect(self.add_message_time)
         self.lessons_list.itemClicked.connect(self.cur_lesson)
-        #self.message_list.itemClicked.connect(self.del_time_message())
+        self.message_list.itemClicked.connect(self.del_time_message)
         self.timetable.itemClicked.connect(self.check_homework)
         self.login_button.clicked.connect(self.ok_login_button)
         self.edit_homework.clicked.connect(self.add_homework)
-        #self.Delete_time_button.clicked.connect(self.del_time_message)
+        self.del_time.clicked.connect(self.del_time_in_list)
         self.no_club_id_token_window = NoTokenAndClubIdWindow()
         self.no_token_widow = NoTokenWindow()
         self.no_club_id_widow = NoClubIdWindow()
@@ -242,8 +243,15 @@ WHERE id = {self.cur_row + 1}''')
             else:
                 self.time_in_csv.show()
 
-    def del_time_message(self):
-        pass
+    def del_time_message(self, item):
+        self.current_time = item.text()
+
+    def del_time_in_list(self):
+        print(self.current_time)
+        with open('time_message.csv', 'r', newline='', encoding='utf8') as f:
+            f = f.read().split()
+        if self.current_time in f:
+            f.index(self.current_time)
 
 
 def except_hook(cls, exception, traceback):
