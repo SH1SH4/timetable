@@ -45,7 +45,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -334,9 +334,9 @@
      <widget class="QTimeEdit" name="time_message">
       <property name="geometry">
        <rect>
-        <x>140</x>
-        <y>260</y>
-        <width>81</width>
+        <x>20</x>
+        <y>280</y>
+        <width>201</width>
         <height>21</height>
        </rect>
       </property>
@@ -345,69 +345,37 @@
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>260</y>
-        <width>81</width>
-        <height>21</height>
+        <y>280</y>
+        <width>82</width>
+        <height>22</height>
        </rect>
       </property>
       <property name="text">
        <string>ДОБАВИТЬ</string>
       </property>
      </widget>
-     <widget class="QListView" name="message_list">
+     <widget class="QListWidget" name="message_list">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>70</y>
+        <y>90</y>
         <width>281</width>
         <height>192</height>
        </rect>
       </property>
      </widget>
-     <widget class="QListWidget" name="week_day_dor_message">
+     <widget class="QPushButton" name="del_time">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>260</y>
-        <width>121</width>
-        <height>21</height>
+        <x>227</x>
+        <y>69</y>
+        <width>75</width>
+        <height>23</height>
        </rect>
       </property>
-      <item>
-       <property name="text">
-        <string>Понедельник</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Вторник</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Среда</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Четверг</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Пятница</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Суббота</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Воскресенье</string>
-       </property>
-      </item>
+      <property name="text">
+       <string>УДАЛИТЬ</string>
+      </property>
      </widget>
     </widget>
    </widget>

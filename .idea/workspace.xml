@@ -25,7 +25,13 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f99c1c3-27ae-44fd-bac6-ba31e0f24431" name="Default Changelist" comment="Всё идёт по плану 2" />
+    <list default="true" id="0f99c1c3-27ae-44fd-bac6-ba31e0f24431" name="Default Changelist" comment="Всё идёт по плану 2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/проект1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/проект1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qt.ui" beforeDir="false" afterPath="$PROJECT_DIR$/qt.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/time_message.csv" beforeDir="false" afterPath="$PROJECT_DIR$/time_message.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled.ui" beforeDir="false" afterPath="$PROJECT_DIR$/untitled.ui" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -153,7 +159,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -282,22 +288,26 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="375" y="476" key="Github.UntrackedFilesDialog/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604173272532" />
-    <state width="1897" height="237" key="GridCell.Tab.0.bottom" timestamp="1605213356204">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1899" height="285" key="GridCell.Tab.0.bottom" timestamp="1605214031709">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1897" height="237" key="GridCell.Tab.0.bottom/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1605213356204" />
-    <state width="1897" height="237" key="GridCell.Tab.0.center" timestamp="1605213356204">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1899" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1605214031709" />
+    <state width="1899" height="285" key="GridCell.Tab.0.center" timestamp="1605214031709">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1897" height="237" key="GridCell.Tab.0.center/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1605213356204" />
-    <state width="1897" height="237" key="GridCell.Tab.0.left" timestamp="1605213356204">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1899" height="285" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1605214031709" />
+    <state width="1899" height="285" key="GridCell.Tab.0.left" timestamp="1605214031709">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1897" height="237" key="GridCell.Tab.0.left/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1605213356204" />
-    <state width="1897" height="237" key="GridCell.Tab.0.right" timestamp="1605213356204">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1899" height="285" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1605214031709" />
+    <state width="1899" height="285" key="GridCell.Tab.0.right" timestamp="1605214031709">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1897" height="237" key="GridCell.Tab.0.right/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1605213356204" />
+    <state width="1899" height="285" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1605214031709" />
     <state width="1897" height="364" key="GridCell.Tab.1.bottom" timestamp="1605213291105">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
