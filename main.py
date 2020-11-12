@@ -1,1 +1,16 @@
-print(len("568c45fa39e820d8a0f2e55be9d0657de8ed12eb0c2bd63a68630bb3a50e2ce5c1d787b43d339c93f6a86"))
+import sys
+import sqlite3
+import csv
+
+WEEK = {1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday',
+        6: 'Saturday', 7: 'Sunday'}
+
+con = sqlite3.connect("расписание.db")
+cur = con.cursor()
+cur_row = 4
+cur_coloumn = 1
+current_lesson = 'Литература'
+cur.execute(f'''UPDATE timetable_lessons
+SET {WEEK[cur_row]} = '{current_lesson}'
+WHERE id = {cur_coloumn + 1}''')
+con.commit()
