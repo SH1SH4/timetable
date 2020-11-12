@@ -55,6 +55,7 @@ class TimeInCsv(QDialog):
 
 
 class MyWidget(QMainWindow):
+
     def __init__(self):
         self.current_lesson = None
         super().__init__()
