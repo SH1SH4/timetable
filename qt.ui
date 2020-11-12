@@ -123,29 +123,124 @@
        <string>Добавить</string>
       </property>
      </widget>
-     <widget class="QLabel" name="Homework_quest">
+     <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
         <x>5</x>
         <y>320</y>
-        <width>281</width>
-        <height>51</height>
+        <width>220</width>
+        <height>30</height>
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:600;&quot;&gt;Домашнее задание:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Домашнее задание:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>310</y>
+        <width>231</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_2">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>340</y>
+        <width>231</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_3">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>320</y>
+        <width>3</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>320</y>
+        <width>3</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>235</x>
+        <y>295</y>
+        <width>51</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600;&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QTextEdit" name="dz_label">
       <property name="geometry">
        <rect>
-        <x>300</x>
+        <x>280</x>
         <y>320</y>
-        <width>441</width>
+        <width>461</width>
         <height>51</height>
        </rect>
       </property>
      </widget>
+     <widget class="QPushButton" name="edit_homework">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>350</y>
+        <width>231</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Редактировать</string>
+      </property>
+     </widget>
+     <zorder>line_3</zorder>
+     <zorder>timetable</zorder>
+     <zorder>lessons_list</zorder>
+     <zorder>db_update</zorder>
+     <zorder>add_time</zorder>
+     <zorder>lesson_line</zorder>
+     <zorder>add_lesson</zorder>
+     <zorder>label_5</zorder>
+     <zorder>line</zorder>
+     <zorder>line_2</zorder>
+     <zorder>line_4</zorder>
+     <zorder>label_6</zorder>
+     <zorder>dz_label</zorder>
+     <zorder>edit_homework</zorder>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
