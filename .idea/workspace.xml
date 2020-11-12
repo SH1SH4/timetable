@@ -19,14 +19,16 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f99c1c3-27ae-44fd-bac6-ba31e0f24431" name="Default Changelist" comment="в таблице осталось сделать ещё одну базу данных с дз и внизу окна поле в котором при нажатии на ячейку показывало дз">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hw_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/hw_bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled.ui" beforeDir="false" afterPath="$PROJECT_DIR$/untitled.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,9 +151,9 @@
       <list>
         <item itemvalue="Python.hw_bot" />
         <item itemvalue="Python.schoolshit (1)" />
+        <item itemvalue="Python.schoolshit" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.schoolshit" />
-        <item itemvalue="Python.schoolshit" />
+        <item itemvalue="Python.hw_bot" />
       </list>
     </recent_temporary>
   </component>
@@ -231,19 +233,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -268,6 +258,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="669" y="135" key="#hw_bot/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1605210732808" />
+    <state x="92" y="92" width="1736" height="896" key="DiffContextDialog" timestamp="1605213113308">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="92" y="92" width="1736" height="896" key="DiffContextDialog/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1605213113308" />
     <state x="739" y="282" key="FileChooserDialogImpl" timestamp="1604172914625">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -284,22 +278,22 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="375" y="476" key="Github.UntrackedFilesDialog/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604173272532" />
-    <state width="1897" height="227" key="GridCell.Tab.0.bottom" timestamp="1604874602184">
+    <state width="1897" height="237" key="GridCell.Tab.0.bottom" timestamp="1605213108214">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1897" height="227" key="GridCell.Tab.0.bottom/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604874602184" />
-    <state width="1897" height="227" key="GridCell.Tab.0.center" timestamp="1604874602183">
+    <state width="1897" height="237" key="GridCell.Tab.0.bottom/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1605213108214" />
+    <state width="1897" height="237" key="GridCell.Tab.0.center" timestamp="1605213108214">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1897" height="227" key="GridCell.Tab.0.center/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604874602183" />
-    <state width="1897" height="227" key="GridCell.Tab.0.left" timestamp="1604874602183">
+    <state width="1897" height="237" key="GridCell.Tab.0.center/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1605213108214" />
+    <state width="1897" height="237" key="GridCell.Tab.0.left" timestamp="1605213108214">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1897" height="227" key="GridCell.Tab.0.left/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604874602183" />
-    <state width="1897" height="227" key="GridCell.Tab.0.right" timestamp="1604874602183">
+    <state width="1897" height="237" key="GridCell.Tab.0.left/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1605213108214" />
+    <state width="1897" height="237" key="GridCell.Tab.0.right" timestamp="1605213108214">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1897" height="227" key="GridCell.Tab.0.right/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1604874602183" />
+    <state width="1897" height="237" key="GridCell.Tab.0.right/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1605213108214" />
     <state x="461" y="185" key="SettingsEditor" timestamp="1604415893595">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -309,9 +303,10 @@
     </state>
     <state x="552" y="273" key="Vcs.Push.Dialog.v2/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1605210684019" />
     <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1604607454602" />
-    <state x="773" y="274" key="VcsDiffUtil.ChangesDialog" timestamp="1604607291999">
+    <state x="773" y="274" key="VcsDiffUtil.ChangesDialog" timestamp="1605213107280">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state x="773" y="274" key="VcsDiffUtil.ChangesDialog/-1360.547.1360.768/0.0.1920.1080@0.0.1920.1080" timestamp="1605213107280" />
     <state x="773" y="274" key="VcsDiffUtil.ChangesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1604607291999" />
     <state x="1142" y="679" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604775327851">
       <screen x="0" y="0" width="1920" height="1080" />

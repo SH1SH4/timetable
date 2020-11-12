@@ -69,8 +69,8 @@ class MyWidget(QMainWindow):
         #self.message_list.itemClicked.connect(self.del_time_message())
         self.timetable.itemClicked.connect(self.check_homework)
         self.login_button.clicked.connect(self.ok_login_button)
-        self.add_dz_button.clicked.connect(self.dz_add_button)
-        self.Delete_time_button.clicked.connect(self.del_time_message)
+        self.edit_homework.clicked.connect(self.add_homework)
+        #self.Delete_time_button.clicked.connect(self.del_time_message)
         self.no_club_id_token_window = NoTokenAndClubIdWindow()
         self.no_token_widow = NoTokenWindow()
         self.no_club_id_widow = NoClubIdWindow()
@@ -95,7 +95,6 @@ class MyWidget(QMainWindow):
             self.peer_id = 0
         self.EditToken.setText(self.token)
         self.EditId.setText(self.id)
-        self.add_dz_button.clicked.connect(self.dz_add_button)
         self.result = self.cur.execute(
             """SELECT lesson FROM lessons""").fetchall()
         self.timetable_ss()
@@ -105,6 +104,12 @@ class MyWidget(QMainWindow):
             f = f.read().split()
             for i in f:
                 self.message_list.addItem(i)
+
+    def add_homework(self):
+        self.cur.execute(f'''UPDATE homrwork
+SET {WEEK[self.cc]} = '{self.dz_widget.item(0, 1).text()}'
+WHERE id = {self.cr + 1}''')
+        self.con.commit()
 
     def add_less(
             self):  # Тут всё работает, из нижней строки добавляет уроки в базу данных
@@ -239,12 +244,6 @@ WHERE id = {self.cur_row + 1}''')
 
     def del_time_message(self):
         pass
-
-    def dz_add_button(self):
-        self.cur.execute(f'''UPDATE homrwork
-SET {WEEK[self.cc]} = '{self.dz_widget.item(0, 1).text()}'
-WHERE id = {self.cr + 1}''')
-        self.con.commit()
 
 
 def except_hook(cls, exception, traceback):
