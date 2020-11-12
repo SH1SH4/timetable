@@ -127,17 +127,11 @@ WHERE id = {self.cr + 1}''')
         print(self.timetable.currentRow(), self.timetable.currentColumn())
         self.cc = self.timetable.currentColumn()
         self.cr = self.timetable.currentRow()
-        result = self.cur.execute(f'''SELECT {WEEK[self.cc]}
+        self.result = self.cur.execute(f'''SELECT {WEEK[self.cc]}
 FROM homrwork
 WHERE id = {self.cr + 1}''').fetchall()
-        result_lesson = self.cur.execute(f'''SELECT {WEEK[self.cc]}
-FROM timetable_lessons
-WHERE id = {self.cr + 1}''').fetchall()
-        self.result_dz = result[0][0]
-        result_lesson = result_lesson[0][0]
-
-        self.dz_widget.setItem(0, 0, QTableWidgetItem(result_lesson))
-        self.dz_widget.setItem(0, 1, QTableWidgetItem(self.result_dz))
+        self.result_dz = self.result[0][0]
+        self.dz_label.setText(self.result_dz)
 
     def update_db(
             self):  # вот это должно добавлять выбранный урок и время в выбранную ячейку в таблице
