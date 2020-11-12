@@ -114,6 +114,7 @@ class MyWidget(QMainWindow):
             self.peer_id = 0
         self.EditToken.setText(self.token)
         self.EditId.setText(self.id)
+        self.add_dz_button.clicked.connect(self.dz_add_button)
         self.result = self.cur.execute(
             """SELECT lesson FROM lessons""").fetchall()
         self.timetable_ss()
