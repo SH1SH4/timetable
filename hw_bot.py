@@ -69,9 +69,13 @@ class MyWidget(QMainWindow):
         self.lessons_list.itemClicked.connect(self.cur_lesson)
         self.message_list.itemClicked.connect(self.del_time_message)
         self.timetable.itemClicked.connect(self.check_homework)
+        self.dz_label.hide()
+        self.Homework_quest.hide()
         self.login_button.clicked.connect(self.ok_login_button)
         self.edit_homework.clicked.connect(self.add_homework)
         self.del_time.clicked.connect(self.del_time_in_list)
+        self.dz_label.textChanged.connect(self.add_homework)
+        #self.Delete_time_button.clicked.connect(self.del_time_message)
         self.no_club_id_token_window = NoTokenAndClubIdWindow()
         self.no_token_widow = NoTokenWindow()
         self.no_club_id_widow = NoClubIdWindow()
@@ -107,8 +111,12 @@ class MyWidget(QMainWindow):
                 self.message_list.addItem(i)
 
     def add_homework(self):
+        self.dz_label.show()
+        self.Homework_quest.show()
+        self.cc = self.timetable.currentColumn()
+        self.cr = self.timetable.currentRow()
         self.cur.execute(f'''UPDATE homrwork
-SET {WEEK[self.cc]} = '{self.dz_widget.item(0, 1).text()}'
+SET {WEEK[self.cc]} = '{self.dz_label.toPlainText()}'
 WHERE id = {self.cr + 1}''')
         self.con.commit()
 
@@ -128,17 +136,11 @@ WHERE id = {self.cr + 1}''')
         print(self.timetable.currentRow(), self.timetable.currentColumn())
         self.cc = self.timetable.currentColumn()
         self.cr = self.timetable.currentRow()
-        result = self.cur.execute(f'''SELECT {WEEK[self.cc]}
+        self.result = self.cur.execute(f'''SELECT {WEEK[self.cc]}
 FROM homrwork
 WHERE id = {self.cr + 1}''').fetchall()
-        result_lesson = self.cur.execute(f'''SELECT {WEEK[self.cc]}
-FROM timetable_lessons
-WHERE id = {self.cr + 1}''').fetchall()
-        self.result_dz = result[0][0]
-        result_lesson = result_lesson[0][0]
-
-        self.dz_widget.setItem(0, 0, QTableWidgetItem(result_lesson))
-        self.dz_widget.setItem(0, 1, QTableWidgetItem(self.result_dz))
+        self.result_dz = self.result[0][0]
+        self.dz_label.setText(str(self.result_dz))
 
     def update_db(
             self):  # вот это должно добавлять выбранный урок и время в выбранную ячейку в таблице
