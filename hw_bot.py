@@ -2,8 +2,6 @@ import sys
 import sqlite3
 import csv
 import main
-from time import sleep
-
 from PyQt5 import uic, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QDialog
 
@@ -217,21 +215,45 @@ WHERE id = {self.cur_row + 1}''')
                         str(val) + '  ' + str(self.time)))
 
     def ok_login_button(self):  # авторизация
+        with open('authorize.csv', encoding="utf8") as csvfile:
+            self.reader = \
+                list(csv.DictReader(csvfile, delimiter=';', quotechar='"'))[0]
+            self.id = self.reader['club_id']
+            self.token = self.reader['token']
+        print(self.id, self.token)
         self.token = self.EditToken.text()
         self.id = self.EditId.text()
+        self.EditToken.setText(self.token)
+        self.EditId.setText(self.id)
         if len(self.id) == 9 and len(self.token) == 85:  # проверка на символы(beta)
-            main.write(self.token, self.id, 0)
-            self.EditToken.setText(self.token)
-            self.EditId.setText(self.id)
+            with open('authorize.csv', 'w', newline='', encoding='utf=8') as f:
+                writer = csv.DictWriter(
+                    f, fieldnames=['club_id', 'token'],
+                    delimiter=';', quoting=csv.QUOTE_NONNUMERIC)
+                writer.writeheader()
+                data = {'club_id': self.id, 'token': self.token}
+                writer.writerow(data)
+                self.EditToken.setStyleSheet("background-color: white; color: black")
+                self.EditId.setStyleSheet("background-color: white; color: black")
+                self.EditId.setText('ok')
+                self.EditToken.setText('ok')
         else:
             if len(self.id) != 9 or len(self.token) != 85:
                 if len(self.id) != 9 and len(self.token) != 85:
                     self.no_club_id_token_window.show()
+                    self.EditId.setText('Некорректный ID')
+                    self.EditId.setStyleSheet("color: red")
+                    self.EditToken.setText('Некорректный Token')
+                    self.EditToken.setStyleSheet("color: red")
                 else:
                     if len(self.id) != 9:
                         self.no_club_id_widow.show()
+                        self.EditId.setText('Некорректный ID')
+                        self.EditId.setStyleSheet("color: red")
                     if len(self.token) != 85:
                         self.no_token_widow.show()
+                        self.EditToken.setText('Некорректный Token')
+                        self.EditToken.setStyleSheet("color: red")
 
     def add_message_time(self):
         with open('time_message.csv', 'r', newline='', encoding='utf8') as f:
