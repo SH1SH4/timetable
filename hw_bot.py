@@ -1,12 +1,31 @@
 import sys
 import sqlite3
 import csv
-import main
+from main import WEEK
 from PyQt5 import uic, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QDialog
 
-WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
-        'Sunday']
+
+class NoLessonDelWindow(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('del_lesson.ui', self)
+        self.setModal(True)
+        self.CancelButton.clicked.connect(self.cancel_button)
+
+    def cancel_button(self):
+        self.close()
+
+
+class NoneLessonDelWindow(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('none_lesson_del.ui', self)
+        self.setModal(True)
+        self.CancelButton.clicked.connect(self.cancel_button)
+
+    def cancel_button(self):
+        self.close()
 
 
 class NoTokenAndClubIdWindow(QDialog):
@@ -86,7 +105,10 @@ class MyWidget(QMainWindow):
         self.login_button.clicked.connect(self.ok_login_button)
         self.del_time.clicked.connect(self.del_time_in_list)
         self.dz_label.textChanged.connect(self.add_homework)
+        self.del_lesson_button.clicked.connect(self.del_lesson)
         # self.Delete_time_button.clicked.connect(self.del_time_message)
+        self.none_lesson_delete = NoneLessonDelWindow()
+        self.no_del_lesson = NoLessonDelWindow()
         self.del_time_no = TimeDelNo()
         self.no_club_id_token_window = NoTokenAndClubIdWindow()
         self.no_token_widow = NoTokenWindow()
@@ -122,6 +144,27 @@ class MyWidget(QMainWindow):
             for i in f:
                 self.message_list.addItem(i)
 
+    def del_lesson(self):
+        if self.current_lesson:
+            id_lesson = self.cur.execute('''SELECT id FROM lessons
+WHERE lesson = ?''', (self.current_lesson,)).fetchall()[0][0]
+            if id_lesson > 16:
+                id_lesson = id_lesson[0]
+                self.cur.execute('''DELETE FROM lessons
+    WHERE id = ?''', (id_lesson[0],)).fetchall()
+                self.con.commit()
+                self.lessons_list.clear()
+                self.result = self.cur.execute(
+                    '''SELECT lesson FROM lessons''').fetchall()
+                for i in range(len(self.result)):
+                    self.lessons_list.addItem(self.result[i][0])
+            elif id_lesson <= 16:
+                print('Низя')
+            else:
+                self.none_lesson_delete.show()
+        else:
+            self.no_del_lesson.show()
+
     def add_homework(self):
         self.dz_label.show()
         self.Homework_quest.show()
@@ -140,13 +183,11 @@ WHERE id = {self.cr + 1}''')
             f"""INSERT INTO lessons(lesson) VALUES('{self.selected_lesson}')""")
         self.con.commit()
         result = self.cur.execute("""SELECT lesson FROM lessons""").fetchall()
-        print(result)
         self.lessons_list.clear()
         for i in range(len(result)):
             self.lessons_list.addItem(result[i][0])
 
     def check_homework(self):  # строка с дз
-        print(self.timetable.currentRow(), self.timetable.currentColumn())
         self.cc = self.timetable.currentColumn()
         self.cr = self.timetable.currentRow()
         self.result = self.cur.execute(f'''SELECT {WEEK[self.cc]}
@@ -159,8 +200,6 @@ WHERE id = {self.cr + 1}''').fetchall()
             self):  # вот это должно добавлять выбранный урок и время в выбранную ячейку в таблице
         self.cur_row = self.timetable.currentRow()
         self.cur_column = self.timetable.currentColumn()
-        print(self.cur_row, self.cur_column, self.current_lesson)
-        print(WEEK[self.cur_column])
         if self.current_lesson == 'None':
 
             self.cur.execute(f'''UPDATE timetable_lessons
@@ -169,18 +208,13 @@ WHERE id = {self.cur_row + 1}''')
             self.cur.execute(f'''UPDATE timetable_time
 SET {WEEK[self.cur_column]} = NULL
 WHERE id = {self.cur_row + 1}''')
-
         else:
-            print(WEEK[self.cur_column])
             self.cur.execute(f'''UPDATE timetable_time
                 SET {WEEK[self.cur_column]} = '{self.add_time.text()}'
                 WHERE id = {self.cur_row + 1}''')
             self.cur.execute(f'''UPDATE timetable_lessons
                 SET {WEEK[self.cur_column]} = '{self.current_lesson}'
                 WHERE id = {self.cur_row + 1}''')
-
-        print(self.add_time.text())
-
         self.con.commit()
         self.timetable_ss()
 
@@ -195,7 +229,8 @@ WHERE id = {self.cur_row + 1}''')
         self.timetable.setColumnCount(len(result[0]) - 1)
         self.titles = [description[0] for description in self.cur.description]
         self.timetable.setHorizontalHeaderLabels(
-            self.titles[1:])  # Вот тут надо написать чтобы заголовки из bd считывались в таблицу
+            self.titles[
+            1:])  # Вот тут надо написать чтобы заголовки из bd считывались в таблицу
         for i, elem in enumerate(result):
             for j, val in enumerate(elem):
                 if j == 0:
@@ -220,12 +255,12 @@ WHERE id = {self.cur_row + 1}''')
                 list(csv.DictReader(csvfile, delimiter=';', quotechar='"'))[0]
             self.id = self.reader['club_id']
             self.token = self.reader['token']
-        print(self.id, self.token)
         self.token = self.EditToken.text()
         self.id = self.EditId.text()
         self.EditToken.setText(self.token)
         self.EditId.setText(self.id)
-        if len(self.id) == 9 and len(self.token) == 85:  # проверка на символы(beta)
+        if len(self.id) == 9 and len(
+                self.token) == 85:  # проверка на символы(beta)
             with open('authorize.csv', 'w', newline='', encoding='utf=8') as f:
                 writer = csv.DictWriter(
                     f, fieldnames=['club_id', 'token'],
@@ -233,8 +268,10 @@ WHERE id = {self.cur_row + 1}''')
                 writer.writeheader()
                 data = {'club_id': self.id, 'token': self.token}
                 writer.writerow(data)
-                self.EditToken.setStyleSheet("background-color: white; color: black")
-                self.EditId.setStyleSheet("background-color: white; color: black")
+                self.EditToken.setStyleSheet(
+                    "background-color: white; color: black")
+                self.EditId.setStyleSheet(
+                    "background-color: white; color: black")
                 self.EditId.setText('ok')
                 self.EditToken.setText('ok')
         else:
@@ -266,7 +303,8 @@ WHERE id = {self.cur_row + 1}''')
             else:
                 time_in_csv = False
 
-        with open('time_message.csv', 'a', newline='', encoding='utf8') as f_new:
+        with open('time_message.csv', 'a', newline='',
+                  encoding='utf8') as f_new:
 
             if time_in_csv == False:
                 message_time = self.time_message.text()
@@ -280,20 +318,17 @@ WHERE id = {self.cur_row + 1}''')
         self.current_time = item.text()
 
     def del_time_in_list(self):
-        print(self.current_time)
         if self.current_time != None:
-            with open('time_message.csv', 'r', newline='', encoding='utf8') as f:
+            with open('time_message.csv', 'r', newline='',
+                      encoding='utf8') as f:
                 f = f.read().split()
 
                 if self.current_time in f:
                     time = f.index(self.current_time)
                     del f[time]
-                    print(f)
-
-            with open('time_message.csv', 'w', newline='', encoding='utf8') as del_f:
                 self.message_list.clear()
-
-            with open('time_message.csv', 'a', newline='', encoding='utf8') as new_f:
+            with open('time_message.csv', 'a', newline='',
+                      encoding='utf8') as new_f:
                 for i in f:
                     new_f.writelines('\n' + i)
                 for i in f:

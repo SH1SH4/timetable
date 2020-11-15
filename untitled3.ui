@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="CancelButton">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>110</x>
      <y>110</y>
      <width>75</width>
      <height>23</height>
@@ -26,30 +26,17 @@
     <string>Cancel</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>241</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#dd0000;&quot;&gt;Неверный&lt;/span&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#000000;&quot;&gt;: &lt;/span&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#110add;&quot;&gt;Club id;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>50</y>
-     <width>91</width>
-     <height>41</height>
+     <x>30</x>
+     <y>10</y>
+     <width>241</width>
+     <height>91</height>
     </rect>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#020ddd;&quot;&gt;Token&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#ff0004;&quot;&gt;Данные введены &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#ff0004;&quot;&gt;в неверном формате&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

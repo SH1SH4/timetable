@@ -7,10 +7,46 @@ import time
 import main
 import csv
 import time
-from threading import Thread
+from threading import Timer
+import time
+from threading import Timer
 
 
-def timetable(msg):
+class RepeatTimer(Timer):
+    def run(self):
+        while not self.finished.wait(self.interval):
+            self.function(*self.args, **self.kwargs)
+
+
+def check_time():
+    time.altzone = 10800
+    now = time.localtime(time.time())
+    sec = now[3] * 60 * 60 + now[4] * 60
+    if sec in times:
+        today_homework()
+
+
+def today_homework():
+    con2 = sqlite3.connect("расписание.db")
+    cur2 = con2.cursor()
+    day = what_today()
+    lessons = cur2.execute(f'''SELECT {main.WEEK[(day + 1) % 7]}
+FROM timetable_lessons''').fetchall()
+    homework = cur2.execute(f'''SELECT {main.WEEK[(day + 1) % 7]}
+FROM homrwork''').fetchall()
+    text = list()
+    for i, item in enumerate(lessons):
+        print(item[0])
+        if item[0] == None:
+            continue
+        elif str(homework[i][0]) == '':
+            text.append(str(item[0]) + '\n' + 'Ничего не задано')
+        else:
+            text.append(str(item[0]) + '\n' + str(homework[i][0]))
+    vk_send('\n ----- \n'.join(text))
+
+
+def timetable():
     day = what_today()
     lessons = cur.execute(f'''SELECT {main.WEEK[day]}
 FROM timetable_lessons''').fetchall()
@@ -79,11 +115,9 @@ def what_asked():
     WHERE {day} = "{event.message.text[4:]}"''').fetchall()
         if lessons:
             db_id = lessons[0][0]
-            print(db_id)
             homework = cur.execute(f'''SELECT {day}
     FROM homrwork
     WHERE id = {db_id}''').fetchone()[0]
-            print(homework)
             if homework:
                 vk_send(homework)
                 break
@@ -96,8 +130,6 @@ def what_asked():
 
 con = sqlite3.connect("расписание.db")
 cur = con.cursor()
-actions = dict()
-
 
 try:
     with open('authorize.csv', encoding="utf8") as csvfile:
@@ -121,25 +153,52 @@ except:
 проведите авторизацию используя timetable_bot.exe')
     exit()
 
+times = list()
+with open('time_message.csv', 'r', newline='',
+          encoding='utf8') as f:
+    f = f.read().split()
+    for hour in f:
+        hour = list(map(int, hour.split(':')))
+        hour = hour[0] * 60 * 60 + hour[1] * 60
+        times.append(hour)
+
+
 VK_SESSION = VkApi(token=token)
 VK = VK_SESSION.get_api()
 longpoll = VkBotLongPoll(VK_SESSION, id)
-if peer_id == 0:
-    for event in longpoll.listen():
-        if event.type == VkBotEventType.MESSAGE_NEW:
-            if event.message.text == '!homework_start':
-                peer_id = int(event.message.peer_id)
-                main.write(token, id, peer_id)
+if times:
+    tm = RepeatTimer(30, check_time)
+    tm.start()
 for event in longpoll.listen():
     if event.type == VkBotEventType.MESSAGE_NEW:
         if int(event.message.peer_id) == peer_id \
                 and event.message.text[0] == '!':
-            if '!дз' in event.message.text:
+            if event.message.text == '!homework_start':
+                peer_id = int(event.message.peer_id)
+                main.write(token, id, peer_id)
+                print('написал')
+            elif '!дз' in event.message.text:
                 what_asked()
-            if '!++ ' in event.message.text:
+            elif '!++ ' in event.message.text:
                 new_asked(event.message.text)
-            if '!сегодня' in event.message.text:
+            elif '!сегодня' in event.message.text:
                 timetable(event.message.text)
+            elif '!помощь' in event.message.text:
+                vk_send('''Доступные комманды:
+!дз <урок>: Присылает дз на ближайший указанный урок
+
+!++ 
+<урок>
+<Домашнее задание>: Записывает дз на ближайший указанный урок
+
+!сегодня: Присылает расписание на сегодняшний день''')
+
+        elif event.message.text == '!homework_start':
+            peer_id = int(event.message.peer_id)
+            main.write(token, id, peer_id)
+            print('написал')
+
+
 
 
 # hw_bot.WEEK[

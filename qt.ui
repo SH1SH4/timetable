@@ -60,6 +60,12 @@
         <height>301</height>
        </rect>
       </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
      </widget>
      <widget class="QListWidget" name="lessons_list">
       <property name="geometry">
@@ -144,6 +150,19 @@
         <width>441</width>
         <height>51</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="del_lesson_button">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>9</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Удалить</string>
       </property>
      </widget>
     </widget>
