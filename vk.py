@@ -56,10 +56,14 @@ FROM timetable_time''').fetchall()
     for i, item in enumerate(lessons):
         print(item[0])
         if item[0] == None:
-            text.append('-----')
+            continue
         else:
-            text.append(str(item[0]) + str(time[i][0]))
-    vk_send('\n'.join(text))
+            text.append(str(item[0]) + '    ' + str(time[i][0]))
+    if text:
+        text = '\n'.join(text)
+    else:
+        text = 'свободный день'
+    vk_send(text)
 
 
 def what_today():
@@ -77,12 +81,14 @@ def new_asked(msg):
 <Домашнее задание>
 ''')
     else:
+        for i in lines:
+            print(i)
         today = what_today()
         days = main.WEEK[today:] + main.WEEK[:today]
         for day in days:
             lessons = cur.execute(f'''SELECT id
         FROM timetable_lessons
-        WHERE {day} = "{lines[1]}"''').fetchall()
+        WHERE {day} = "{lines[1][:-1]}"''').fetchall()
             if lessons:
                 db_id = lessons[0][0]
                 print(day, ' '.join(lines[2:]), db_id)
@@ -105,14 +111,14 @@ def vk_send(text, keyboard=None, sticker_id=None):
     VK.messages.send(message=text, random_id=randint(-2 ** 63, 2 ** 63 - 1),
                      peer_id=peer_id, keyboard=keyboard, sticker_id=sticker_id)
 
-def what_asked():
-    lesson = event.message.text[4:]
+def what_asked(msg):
+    lesson = msg[4:]
     today = what_today()
     days = main.WEEK[today:] + main.WEEK[:today]
     for day in days:
         lessons = cur.execute(f'''SELECT id
     FROM timetable_lessons
-    WHERE {day} = "{event.message.text[4:]}"''').fetchall()
+    WHERE {day} = "{lesson}"''').fetchall()
         if lessons:
             db_id = lessons[0][0]
             homework = cur.execute(f'''SELECT {day}
@@ -178,11 +184,11 @@ for event in longpoll.listen():
                 main.write(token, id, peer_id)
                 print('написал')
             elif '!дз' in event.message.text:
-                what_asked()
-            elif '!++ ' in event.message.text:
+                what_asked(event.message.text)
+            elif '!++' in event.message.text:
                 new_asked(event.message.text)
             elif '!сегодня' in event.message.text:
-                timetable(event.message.text)
+                timetable()
             elif '!помощь' in event.message.text:
                 vk_send('''Доступные комманды:
 !дз <урок>: Присылает дз на ближайший указанный урок
@@ -196,9 +202,3 @@ for event in longpoll.listen():
         elif event.message.text == '!homework_start':
             peer_id = int(event.message.peer_id)
             main.write(token, id, peer_id)
-            print('написал')
-
-
-
-
-# hw_bot.WEEK[
